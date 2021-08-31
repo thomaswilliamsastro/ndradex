@@ -202,6 +202,7 @@ def run(
             # run RADEX with multiprocess and update dataset
             execute(
                 dataset,
+                QN_ul,
                 *iterables,
                 dir=temp_dir,
                 progress=progress,
@@ -235,7 +236,7 @@ def get_empty_dataset(lamda, empty):
     return dataset
 
 
-def execute(dataset, *iterables, dir=".", progress=True, n_procs=None):
+def execute(dataset, QN_ul, *iterables, dir=".", progress=True, n_procs=None):
     """Run grid RADEX calculation and store results into a dataset."""
     total = np.prod(list(dataset.dims.values()))
     outfile = Path(dir, "grid.out").expanduser().resolve()
@@ -244,7 +245,7 @@ def execute(dataset, *iterables, dir=".", progress=True, n_procs=None):
         n_procs
     ) as runner, tqdm(total=total, disable=not progress) as bar:
         # write outputs to a single file
-        for output in runner.map(ndradex.radex.run, *iterables):
+        for output in runner.map(ndradex.radex.run, QN_ul, *iterables):
             f.write(",".join(output) + "\n")
             bar.update(1)
 

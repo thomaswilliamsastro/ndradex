@@ -23,6 +23,7 @@ logger = getLogger(__name__)
 
 # main function
 def run(
+    QN_ul,
     input,
     radex=None,
     timeout=None,
@@ -78,7 +79,7 @@ def run(
             stderr=PIPE,
             check=True,
         )
-        return ensure_output(cp, outfile, encoding)
+        return ensure_output(QN_ul, cp, outfile, encoding)
     except FileNotFoundError:
         logger.warning("RADEX path or moldata does not exist")
         return ERROR_OUTPUT
@@ -115,8 +116,13 @@ def ensure_output(cp, outfile, encoding="utf-8"):
     if ndradex.RADEX_VERSION not in cp.stdout.decode(encoding):
         raise RuntimeError("RADEX version is not valid")
 
+    QN_ul_str = QN_ul.replace('(', '').replace(')', '').replace(',', '_').split('-')
+
     with open(outfile, encoding=encoding) as f:
-        return f.readlines()[-1].split()[-N_VARS:]
+        for line in f.readlines():
+            columns = line.split()
+            if columns[0] == QN_ul_str[0] and columns[2] == QN_ul_str[1]:
+                return line.split()[-N_VARS:]
 
 
 def remove_file(path):
