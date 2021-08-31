@@ -3,7 +3,7 @@ __all__ = ["run"]
 
 # standard library
 from enum import Enum, auto
-from itertools import product, repeat
+from itertools import product, repeat, chain
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
@@ -189,6 +189,16 @@ def run(
         geom,
     )
 
+    # Iterate QN_ul over possible gridded parameters
+
+    times_to_repeat = 0
+
+    for variable in [T_kin, N_mol, n_H2, n_pH2, n_oH2, n_e, n_H, n_He, n_Hp, T_bg, dv, geom]:
+        if type(variable) in [list, np.ndarray]:
+            times_to_repeat += len(variable)
+
+    QN_ul_iter = list(chain.from_iterable(repeat(x, times_to_repeat) for x in QN_ul))
+
     with TemporaryDirectory(dir=work_dir) as temp_dir:
         with ndradex.db.LAMDA(query, temp_dir) as lamda:
             # make an empty dataset and flattened args
@@ -202,7 +212,7 @@ def run(
             # run RADEX with multiprocess and update dataset
             execute(
                 dataset,
-                QN_ul,
+                QN_ul_iter,
                 *iterables,
                 dir=temp_dir,
                 progress=progress,
