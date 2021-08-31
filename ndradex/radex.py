@@ -111,7 +111,7 @@ def ensure_input(input, encoding="utf-8"):
     return input, outfile
 
 
-def ensure_output(cp, outfile, encoding="utf-8"):
+def ensure_output(QN_ul, cp, outfile, encoding="utf-8"):
     """Ensure that the RADEX output is valid."""
     if ndradex.RADEX_VERSION not in cp.stdout.decode(encoding):
         raise RuntimeError("RADEX version is not valid")
