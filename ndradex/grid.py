@@ -191,11 +191,11 @@ def run(
 
     # Iterate QN_ul over possible gridded parameters
 
-    times_to_repeat = 0
+    times_to_repeat = 1
 
     for variable in [T_kin, N_mol, n_H2, n_pH2, n_oH2, n_e, n_H, n_He, n_Hp, T_bg, dv, geom]:
         if type(variable) in [list, np.ndarray]:
-            times_to_repeat += len(variable)
+            times_to_repeat *= len(variable)
 
     QN_ul_iter = list(chain.from_iterable(repeat(x, times_to_repeat) for x in QN_ul))
 
