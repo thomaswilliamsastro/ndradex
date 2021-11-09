@@ -189,6 +189,9 @@ def run(
         geom,
     )
 
+    if type(QN_ul) == str:
+        QN_ul = [QN_ul]
+
     # Iterate QN_ul over possible gridded parameters
 
     times_to_repeat = 1
