@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "ndradex"
+name = "ndradexhyperfine"
 version = "0.2.4"
 description = "Python package for RADEX grid calculation"
 authors = ["Thomas Williams <williams@mpia.de>"]

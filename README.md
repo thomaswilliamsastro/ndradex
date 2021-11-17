@@ -27,10 +27,10 @@ The output will be multi-dimensional arrays, which may be useful for parameter s
 
 ## Installation
 
-You can install ndRADEX with pip:
+You can install ndradexhyperfine with pip:
 
 ```shell
-$ pip install ndradex
+$ pip install ndradexhyperfine
 ```
 
 Please make sure that all requirements are met before the installation.
@@ -40,7 +40,7 @@ Please make sure that all requirements are met before the installation.
 Within Python, import the package like:
 
 ```python
->>> import ndradex
+>> > import ndradexhyperfine
 ```
 
 ### Single RADEX run
@@ -49,7 +49,7 @@ The main funtion of ndRADEX is `ndradex.run()`.
 For example, to get RADEX results of CO(1-0) with kinetic temperature of 100 K, CO column density of 1e15 cm^-2, and H2 density of 1e3 cm^-3:
 
 ```python
->>> ds = ndradex.run('co.dat', '1-0', 100, 1e15, 1e3)
+>>> ds = ndradexhyperfine.run('co.dat', '1-0', 100, 1e15, 1e3)
 ```
 
 where `'co.dat'` is a name of [LAMDA] datafile and `'1-0'` is a name of transition.
@@ -100,7 +100,7 @@ You can access each result value like:
 As a natural extension, you can run grid RADEX calculation like:
 
 ```python
->>> ds = ndradex.run('co.dat', ['1-0', '2-1'], T_kin=[100, 200, 300],
+>>> ds = ndradexhyperfine.run('co.dat', ['1-0', '2-1'], T_kin=[100, 200, 300],
                      N_mol=1e15, n_H2=[1e3, 1e4, 1e5, 1e6, 1e7])
 ```
 
@@ -135,7 +135,7 @@ Data variables:
     F            (QN_ul, T_kin, n_H2) float64 2.684e-08 1.12e-08 ... 4.666e-08
 ```
 
-For more information, run `help(ndradex.run)` to see the docstrings.
+For more information, run `help(ndradexhyperfine.run)` to see the docstrings.
 
 ### Save/load results
 
@@ -143,10 +143,10 @@ You can save and load the dataset like:
 
 ```python
 # save results to a netCDF file
->>> ndradex.save_dataset(ds, 'results.nc')
+>>> ndradexhyperfine.save_dataset(ds, 'results.nc')
 
 # load results from a netCDF file
->>> ds = ndradex.load_dataset('results.nc')
+>>> ds = ndradexhyperfine.load_dataset('results.nc')
 ```
 
 ## Customizations
@@ -189,7 +189,7 @@ As shown in the second and third examples, you can also specify a local file pat
 After the customization, you can use these aliases in the `run()` function:
 
 ```python
->>> ds = ndradex.run('CS', '1-0', ...) # equiv to cs@lique.dat
+>>> ds = ndradexhyperfine.run('CS', '1-0', ...) # equiv to cs@lique.dat
 ```
 
 ## References

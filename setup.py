@@ -24,7 +24,7 @@ class Build(build):
             RADEX_BUILD,
             stdout=PIPE,
             stderr=PIPE,
-            cwd="ndradex/bin",
+            cwd="ndradexhyperfine/bin",
             check=True,
         )
         build.run(self)

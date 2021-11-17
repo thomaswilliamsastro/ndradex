@@ -28,11 +28,11 @@ jobs:
           sudo apt install gfortran
           pip install poetry
           poetry install
-          cd ndradex/bin
+          cd ndradexhyperfine/bin
           make build
       - name: Lint by Flake8
-        run: poetry run flake8 tests ndradex
+        run: poetry run flake8 tests ndradexhyperfine
       - name: Format by Black
-        run: poetry run black --check tests ndradex
+        run: poetry run black --check tests ndradexhyperfine
       - name: Test by pytest
         run : poetry run pytest -v tests
