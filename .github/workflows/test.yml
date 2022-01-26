@@ -30,9 +30,3 @@ jobs:
           poetry install
           cd ndradexhyperfine/bin
           make build
-      - name: Lint by Flake8
-        run: poetry run flake8 tests ndradexhyperfine
-      - name: Format by Black
-        run: poetry run black --check tests ndradexhyperfine
-      - name: Test by pytest
-        run : poetry run pytest -v tests
