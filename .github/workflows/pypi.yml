@@ -13,13 +13,13 @@ jobs:
       TWINE_USERNAME: __token__
       TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           submodules: true
       - name: Setup Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v3
         with:
-          python-version: 3.8, 3.9, 3.10
+          python-version: 3.8.16, 3.9.16, 3.10.10
       - name: Install dependencies
         run: |
           pip install poetry

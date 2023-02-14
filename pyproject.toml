@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ndradexhyperfine"
-version = "0.2.6"
+version = "0.2.6.1"
 description = "Python package for RADEX grid calculation"
 authors = ["Thomas Williams <thomas.g.williams94@gmail.com>"]
 license = "MIT"
