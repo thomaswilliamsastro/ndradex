@@ -9,13 +9,11 @@ from concurrent import futures
 from functools import wraps
 from inspect import signature
 from logging import getLogger
-from multiprocessing import cpu_count
+from multiprocessing import cpu_count, get_context
 from random import getrandbits
-
 
 # dependencies
 import xarray as xr
-
 
 logger = getLogger(__name__)
 
@@ -80,4 +78,6 @@ def runner(n_procs=None):
     if n_procs is None:
         n_procs = cpu_count() - 1
 
-    return futures.ProcessPoolExecutor(n_procs)
+    context = get_context('fork')
+
+    return futures.ProcessPoolExecutor(n_procs, mp_context=context)
